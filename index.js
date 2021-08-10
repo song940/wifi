@@ -1,16 +1,50 @@
-import { ready } from 'https://lsong.org/scripts/dom.js';
-import { h, render, useState, useEffect } from 'https://unpkg.com/htm/preact/standalone.module.js';
+import { ready, addEventListener } from 'https://lsong.org/scripts/dom.js';
 
-const App = () => {
-  return [
-    h('h2', null, "App"),
-    h('ul', null, [
-      h('li', null, "Link")
-    ])
-  ]
-}
+const escape = (v = '') => {
+  const needsEscape = ['"', ';', ',', ':', '\\'];
+  let escaped = '';
+  for (const c of v) {
+    if (needsEscape.includes(c)) {
+      escaped += `\\${c}`;
+    } else {
+      escaped += c;
+    }
+  }
+  return escaped;
+};
+
 
 ready(() => {
-  const app = document.getElementById('app');
-  render(h(App), app);
+
+  const wifi = {
+    encryption: 'WPA',
+    hiddenSSID: false,
+  };
+
+  const commit = () => {
+    console.log(wifi);
+    const ssid = escape(wifi.ssid);
+    const password = !wifi.encryption ? '' : escape(wifi.password);
+    const sign = `WIFI:T:${wifi.encryption};S:${ssid};P:${password};H:${wifi.hiddenSSID};`;
+    qrcode.src = 'https://api.lsong.me/qr?text=' + sign;
+  };
+
+  addEventListener('form', 'input', (e) => {
+    const input = e.target;
+    const { name, value } = input;
+
+    switch (name) {
+      case 'encryption':
+        const { encryption } = input.dataset;
+        wifi[name] = encryption;
+        break;
+      case 'hiddenSSID':
+        wifi[name] = input.checked;
+        break;
+      default:
+        wifi[name] = value;
+        break;
+    }
+    commit();
+  })
 });

@@ -3,7 +3,7 @@
 
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>Liu Song's Page</title>
+  <title>Liu Song's WiFi Sign</title>
   <meta name="viewport" content="width=device-width">
   <link type="text/css" charset="utf-8" rel="stylesheet" href="//lsong.org/css/stylesheet.css">
   <link type="text/css" charset="utf-8" rel="stylesheet" href="//lsong.org/css/main.css">
@@ -13,7 +13,7 @@
 
 <body class="container">
   <header class="header">
-    <h1>Liu Song's Page</h1>
+    <h1>Liu Song's WiFi Sign</h1>
     <nav class="nav nav-bar">
       <a href="//lsong.org">home</a>
       <a href="//lsong.org/posts">blog</a>
@@ -32,7 +32,42 @@
           href="//github.com/song940?tab=repositories">apps</a>.</p>
     </section>
 
-    <section id="app"></section>
+
+    <section>
+      <h2>Create WiFi Sign</h2>
+      <p>Print a simple card with your WiFi login details. Tape it to the fridge, keep it in your wallet, etc.</p>
+      <div class="row">
+        <div class="col-6">
+          <form class="form" action="">
+            <div class="form-field">
+              <label for="">SSID</label>
+              <input name="ssid" type="text" placeholder="WiFi Name">
+            </div>
+            <div class="form-field">
+              <label for="">Password</label>
+              <input name="password" type="text" placeholder="WiFi Password">
+            </div>
+            
+            <div class="form-field">
+              <label for="">Encryption</label>
+              <label for="encryption-none"><input type="radio" name="encryption" id="encryption-none" data-encryption="" >None</label>
+              <label for="encryption-wpa"><input type="radio" name="encryption" id="encryption-wpa" data-encryption="WPA" checked>WPA/WPA2/WPA3</label>
+              <label for="encryption-wep"><input type="radio" name="encryption" id="encryption-wep" data-encryption="WEP" >WEP</label>
+            </div>
+            <div class="form-field">
+              <label for="hiddenSSID"><input type="checkbox" id="hiddenSSID" name="hiddenSSID">Hidden SSID</label>
+            </div>
+          </form>
+        </div>
+        <div class="col-6 preview">
+          <img id="qrcode" src="https://api.lsong.me/qr?text=hi" alt="">
+          <div class="form-field">
+            <button class="button button-primary">Print</button>
+            <button class="button button-primary">Download</button>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <hr />
     <section class="subscribe">
