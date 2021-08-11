@@ -22,7 +22,6 @@ ready(() => {
   };
 
   const commit = () => {
-    console.log(wifi);
     const ssid = escape(wifi.ssid);
     const password = !wifi.encryption ? '' : escape(wifi.password);
     const sign = `WIFI:T:${wifi.encryption};S:${ssid};P:${password};H:${wifi.hiddenSSID};`;
@@ -31,8 +30,6 @@ ready(() => {
 
   addEventListener('form', 'input', (e) => {
     const input = e.target;
-    const { name, value } = input;
-
     switch (name) {
       case 'encryption':
         const { encryption } = input.dataset;
@@ -42,7 +39,7 @@ ready(() => {
         wifi[name] = input.checked;
         break;
       default:
-        wifi[name] = value;
+        wifi[name] = input.value;
         break;
     }
     commit();
