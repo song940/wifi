@@ -30,6 +30,7 @@ ready(() => {
 
   addEventListener('form', 'input', (e) => {
     const input = e.target;
+    const { name } = input;
     switch (name) {
       case 'encryption':
         const { encryption } = input.dataset;
